@@ -4,7 +4,6 @@ import android.Manifest
 import android.app.Activity
 import android.app.ProgressDialog
 import android.content.ClipData
-import android.content.ComponentName
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -17,9 +16,7 @@ import android.util.Log
 import android.view.KeyEvent
 import android.view.View
 import android.webkit.*
-import androidx.browser.customtabs.CustomTabsClient
 import androidx.browser.customtabs.CustomTabsIntent
-import androidx.browser.customtabs.CustomTabsServiceConnection
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import java.io.File
@@ -35,7 +32,7 @@ class MainActivity : Activity() {
     private var mCameraPhotoPath: String? = null
     private var size: Long = 0
 
-    var home = Uri.parse("http://app.staging.voltmoney.in/")
+    var home = Uri.parse("http://app.staging.voltmoney.in/partnerplatform?platform=SDK_INVESTWELL")
 
 
     public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
