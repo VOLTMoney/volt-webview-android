@@ -32,7 +32,7 @@ class MainActivity : Activity() {
     private var mCameraPhotoPath: String? = null
     private var size: Long = 0
 
-    var appURL = Uri.parse("http://app.staging.voltmoney.in/partnerplatform?platform=SDK_INVESTWELL")
+    var appURL: Uri = Uri.parse("http://app.staging.voltmoney.in/partnerplatform?platform=SDK_INVESTWELL")
 
 
     public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
