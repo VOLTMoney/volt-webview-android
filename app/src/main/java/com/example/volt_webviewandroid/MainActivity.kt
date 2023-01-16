@@ -193,7 +193,7 @@ class MainActivity : Activity() {
             // If url contains mailto link then open Mail Intent
             if (url.contains(home.host!!)) {
                 webView.loadUrl(url)
-            } else if (url.contains("alpha-")) {
+            } else if (url.contains("alpha-") || url.contains("bfin")) {
                 val customIntent = CustomTabsIntent.Builder()
                 customIntent.setUrlBarHidingEnabled(true)
                 customIntent.setShowTitle(false);
@@ -213,7 +213,7 @@ class MainActivity : Activity() {
                         R.color.purple_200
                     )
                 );
-                openCustomTab(this@MainActivity, customIntent.build(), Uri.parse("https://bfin.in/?0WV4SMAV"));
+                openCustomTab(this@MainActivity, customIntent.build(), Uri.parse(url));
 
             } else {
                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
