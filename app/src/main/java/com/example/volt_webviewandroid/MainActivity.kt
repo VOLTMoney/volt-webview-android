@@ -102,7 +102,7 @@ class MainActivity : Activity() {
         webView!!.webChromeClient = PQChromeClient()
         //if SDK version is greater of 19 then activate hardware acceleration otherwise activate software acceleration
         if (Build.VERSION.SDK_INT >= 19) {
-            webView!!.setLayerType(View.LAYER_TYPE_HARDWARE, null)
+            webView!!.setLayerType(View.LAYER_TYPE_SOFTWARE, null)
         } else if (Build.VERSION.SDK_INT >= 11 && Build.VERSION.SDK_INT < 19) {
             webView!!.setLayerType(View.LAYER_TYPE_SOFTWARE, null)
         }
