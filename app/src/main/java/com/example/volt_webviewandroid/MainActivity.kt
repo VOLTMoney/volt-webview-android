@@ -4,6 +4,7 @@ import android.Manifest
 import android.app.Activity
 import android.app.ProgressDialog
 import android.content.ClipData
+import android.content.ComponentName
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -16,7 +17,11 @@ import android.util.Log
 import android.view.KeyEvent
 import android.view.View
 import android.webkit.*
+import androidx.browser.customtabs.CustomTabsClient
+import androidx.browser.customtabs.CustomTabsIntent
+import androidx.browser.customtabs.CustomTabsServiceConnection
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
@@ -181,11 +186,35 @@ class MainActivity : Activity() {
 
     inner class PQClient : WebViewClient() {
         var progressDialog: ProgressDialog? = null
+
+
         override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
 
             // If url contains mailto link then open Mail Intent
             if (url.contains(home.host!!)) {
                 webView.loadUrl(url)
+            } else if (url.contains("alpha-")) {
+                val customIntent = CustomTabsIntent.Builder()
+                customIntent.setUrlBarHidingEnabled(true)
+                customIntent.setShowTitle(false);
+                customIntent.setStartAnimations(
+                    this@MainActivity,
+                    R.anim.slide_in_right,
+                    R.anim.slide_out_right
+                )
+                customIntent.setExitAnimations(
+                    this@MainActivity,
+                    R.anim.slide_out_right,
+                    R.anim.slide_in_right
+                )
+                customIntent.setToolbarColor(
+                    ContextCompat.getColor(
+                        this@MainActivity,
+                        R.color.purple_200
+                    )
+                );
+                openCustomTab(this@MainActivity, customIntent.build(), Uri.parse("https://bfin.in/?0WV4SMAV"));
+
             } else {
                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
                 webView.context.startActivity(intent)
@@ -257,4 +286,28 @@ class MainActivity : Activity() {
             }
         }
     }
+
+    fun openCustomTab(activity: Activity, customTabsIntent: CustomTabsIntent, uri: Uri?) {
+        // package name is the default package
+        // for our custom chrome tab
+        val packageName = "com.android.chrome"
+        if (packageName != null) {
+
+            // we are checking if the package name is not null
+            // if package name is not null then we are calling
+            // that custom chrome tab with intent by passing its
+            // package name.
+            customTabsIntent.intent.setPackage(packageName)
+
+            // in that custom tab intent we are passing
+            // our url which we have to browse.
+            customTabsIntent.launchUrl(activity, uri!!)
+        } else {
+            // if the custom tabs fails to load then we are simply
+            // redirecting our user to users device default browser.
+            activity.startActivity(Intent(Intent.ACTION_VIEW, uri))
+        }
+    }
 }
+
+
