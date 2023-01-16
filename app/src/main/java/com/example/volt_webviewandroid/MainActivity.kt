@@ -195,7 +195,7 @@ class MainActivity : Activity() {
                 webView.loadUrl(url)
             }
             // redirect url window
-            else if (url.contains("alpha-") || url.contains("bfin") || url.contains("bajaj")) {
+            else if (url.contains("alpha-") || url.contains("bfin.in") || url.contains("docapp.bajajfinserv.in")) {
                 val customIntent = CustomTabsIntent.Builder()
                 customIntent.setUrlBarHidingEnabled(true)
                 customIntent.setShowTitle(false);
