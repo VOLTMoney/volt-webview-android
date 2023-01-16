@@ -106,7 +106,7 @@ class MainActivity : Activity() {
         } else if (Build.VERSION.SDK_INT >= 11 && Build.VERSION.SDK_INT < 19) {
             webView!!.setLayerType(View.LAYER_TYPE_SOFTWARE, null)
         }
-        webView!!.loadUrl("http://app.staging.voltmoney.in/")
+        webView!!.loadUrl(home.toString())
     }
 
     @Throws(IOException::class)
