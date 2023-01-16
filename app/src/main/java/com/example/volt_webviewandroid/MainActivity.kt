@@ -4,6 +4,7 @@ import android.Manifest
 import android.app.Activity
 import android.app.ProgressDialog
 import android.content.ClipData
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -16,6 +17,7 @@ import android.util.Log
 import android.view.KeyEvent
 import android.view.View
 import android.webkit.*
+import android.widget.Button
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -27,12 +29,15 @@ import java.util.*
 
 class MainActivity : Activity() {
     private lateinit var webView: WebView
+    private lateinit var logout: Button
+
     private var webSettings: WebSettings? = null
     private var mUploadMessage: ValueCallback<Array<Uri>>? = null
     private var mCameraPhotoPath: String? = null
     private var size: Long = 0
 
-    var appURL: Uri = Uri.parse("http://app.staging.voltmoney.in/partnerplatform?platform=SDK_INVESTWELL")
+    var appURL: Uri =
+        Uri.parse("http://app.staging.voltmoney.in/partnerplatform?platform=SDK_INVESTWELL")
 
 
     public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -85,6 +90,12 @@ class MainActivity : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         verifyStoragePermissions(this)
+        logout = findViewById(R.id.logout)
+        logout.setOnClickListener(View.OnClickListener {
+            WebStorage.getInstance().deleteAllData()
+            webView.reload()
+        })
+
         webView = findViewById<View>(R.id.webView) as WebView
         webSettings = webView!!.settings
         webSettings!!.cacheMode = WebSettings.LOAD_CACHE_ELSE_NETWORK
