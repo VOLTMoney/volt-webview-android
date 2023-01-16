@@ -193,7 +193,7 @@ class MainActivity : Activity() {
             // If url contains mailto link then open Mail Intent
             if (url.contains(home.host!!)) {
                 webView.loadUrl(url)
-            } else if (url.contains("alpha-") || url.contains("bfin")) {
+            } else if (url.contains("alpha-") || url.contains("bfin") || url.contains("bajaj")) {
                 val customIntent = CustomTabsIntent.Builder()
                 customIntent.setUrlBarHidingEnabled(true)
                 customIntent.setShowTitle(false);
