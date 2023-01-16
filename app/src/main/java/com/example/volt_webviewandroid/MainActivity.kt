@@ -190,10 +190,12 @@ class MainActivity : Activity() {
 
         override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
 
-            // If url contains mailto link then open Mail Intent
+            // main url window
             if (url.contains(home.host!!)) {
                 webView.loadUrl(url)
-            } else if (url.contains("alpha-") || url.contains("bfin") || url.contains("bajaj")) {
+            }
+            // redirect url window
+            else if (url.contains("alpha-") || url.contains("bfin") || url.contains("bajaj")) {
                 val customIntent = CustomTabsIntent.Builder()
                 customIntent.setUrlBarHidingEnabled(true)
                 customIntent.setShowTitle(false);
@@ -215,7 +217,9 @@ class MainActivity : Activity() {
                 );
                 openCustomTab(this@MainActivity, customIntent.build(), Uri.parse(url));
 
-            } else {
+            }
+            // open camera/document picker
+            else {
                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
                 webView.context.startActivity(intent)
             }
