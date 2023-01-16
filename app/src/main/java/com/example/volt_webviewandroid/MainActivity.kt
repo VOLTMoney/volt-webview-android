@@ -32,7 +32,7 @@ class MainActivity : Activity() {
     private var mCameraPhotoPath: String? = null
     private var size: Long = 0
 
-    var home = Uri.parse("http://app.staging.voltmoney.in/partnerplatform?platform=SDK_INVESTWELL")
+    var appURL = Uri.parse("http://app.staging.voltmoney.in/partnerplatform?platform=SDK_INVESTWELL")
 
 
     public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -103,7 +103,7 @@ class MainActivity : Activity() {
         } else if (Build.VERSION.SDK_INT >= 11 && Build.VERSION.SDK_INT < 19) {
             webView!!.setLayerType(View.LAYER_TYPE_SOFTWARE, null)
         }
-        webView!!.loadUrl(home.toString())
+        webView!!.loadUrl(appURL.toString())
     }
 
     @Throws(IOException::class)
@@ -188,7 +188,7 @@ class MainActivity : Activity() {
         override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
 
             // main url window
-            if (url.contains(home.host!!)) {
+            if (url.contains(appURL.host!!)) {
                 webView.loadUrl(url)
             }
             // redirect url window
