@@ -98,7 +98,7 @@ class MainActivity : Activity() {
 
         webView = findViewById<View>(R.id.webView) as WebView
         webSettings = webView!!.settings
-        webSettings!!.cacheMode = WebSettings.LOAD_CACHE_ELSE_NETWORK
+        webSettings!!.cacheMode = WebSettings.LOAD_NO_CACHE
         webSettings!!.javaScriptEnabled = true
         webSettings!!.loadWithOverviewMode = true
         webSettings!!.allowFileAccess = true
