@@ -29,7 +29,7 @@ import java.util.*
 
 class MainActivity : Activity() {
     private lateinit var webView: WebView
-    private lateinit var logout: Button
+//    private lateinit var logout: Button
 
     private var webSettings: WebSettings? = null
     private var mUploadMessage: ValueCallback<Array<Uri>>? = null
@@ -37,7 +37,7 @@ class MainActivity : Activity() {
     private var size: Long = 0
 
     var appURL: Uri =
-        Uri.parse("http://app.staging.voltmoney.in/partnerplatform?platform=SDK_INVESTWELL")
+        Uri.parse("http://admin.voltmoney.in")
 
 
     public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -90,11 +90,11 @@ class MainActivity : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         verifyStoragePermissions(this)
-        logout = findViewById(R.id.logout)
-        logout.setOnClickListener(View.OnClickListener {
-            WebStorage.getInstance().deleteAllData()
-            webView.reload()
-        })
+//        logout = findViewById(R.id.logout)
+//        logout.setOnClickListener(View.OnClickListener {
+//            WebStorage.getInstance().deleteAllData()
+//            webView.reload()
+//        })
 
         webView = findViewById<View>(R.id.webView) as WebView
         webSettings = webView!!.settings
